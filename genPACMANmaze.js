@@ -11,7 +11,7 @@ class Spawn{ width = 40;  height = 40; }
 
 const gridWidth = 400 / 10, gridHeight = 500 / 10;
 
-const empty = "", border = "0", ghostSpawnLoc = "1", dot = "2";
+const empty = " ", border = "0", ghostSpawnLoc = "1", dot = "2";
 
 let pacmap = [];
 
@@ -23,41 +23,38 @@ let pacmap = [];
             /*empty*/  else if ( (col !== 0) ) pacmap.push(empty);
         }
     }
-    console.log(pacmap);
 
 // InsertGhostBase:
     let ghostBase = [
-        0,0,"",0,0,
+        0,0," ",0,0,
         0,1,1,1,0,
         0,1,1,1,0,
         0,0,0,0,0
     ];
     for (let row = (gridHeight / 2 - 2); row < (gridHeight / 2 + 2); row++){
-        for (let col = (gridWidth / 2 - 2); col < (gridWidth / 2 + 2); col++){
-
+        for (let col = (gridWidth / 2 - 2); col < (gridWidth / 2 + 2 + 1); col++){
             idx = (row * gridWidth + col);
-            
             pacmap[idx] = ghostBase.shift();
-            
-            
         }
     }
 
+// InsertInnerBorders:
+    const total_grid_space = gridWidth * gridHeight;
+    
+    const gridPerimeter = 2 * (gridWidth + gridHeight);
 
-// // InsertInnerBorders:
+    const remaining_space = total_grid_space - gridPerimeter;
     
-//     const total_grid_space = gridWidth * gridHeight;
-    
-//     const gridPerimeter = 2 * (gridWidth + gridHeight);
-
-//     const remaining_space = total_grid_space - gridPerimeter;
-    
-//     let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
+    let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
         
-// //     randomInnerBorders:
+    randomInnerBorders:
 
-//         pacmap.forEach(element=>{ (element === empty) && (Math.random() > 0.5) && (element = border) && (border_max_space--)});
-
+        while (border_max_space) {
+            index = (cnt % total_grid_space); 
+            if ((element === empty) && (Math.random() > 0.5)) {
+                (pacmap[index] = border) && (border_max_space--);  
+            }
+        }
 // // InsertFruit:
         
 //         pacmap.forEach(element=>{ if (element === empty) element = dot;});
