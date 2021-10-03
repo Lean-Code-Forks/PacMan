@@ -26,20 +26,22 @@ let pacmap = [];
     console.log(pacmap);
 
 // InsertGhostBase:
+
+    const ghostBaseWidth = 3, ghostBaseHeight = 3;
+
     const row = Math.random(), col = Math.random();
-    const rowT = Math.round(row * (gridHeight - 3));
-    const colL = Math.round(col * (gridWidth  - 3));
+    const rowT = Math.round(row * (gridHeight - ghostBaseHeight));
+    const colL = Math.round(col * (gridWidth  - ghostBaseWidth));
     
-    for (let row = rowT; row < (rowT + 3); row++) {
-        for (let col = colL; col < colL; col++) {
+    for (let row = rowT; row < (rowT + ghostBaseHeight); row++) {
+        for (let col = colL; col < (colL + ghostBaseWidth); col++) {
             
             idx = gridWidth * row + col 
                        
             /*border*/ if ( (col === 0) || (row === 0)) pacmap[idx] = border;
             /*border*/ else if ( (col === gridWidth-1) || (row === gridHeight-1) ) pacmap[idx] = border;
             /*ghostSpawn*/  else if ( (col !== 0) ) pacmap[idx] = ghostSpawnLoc;
-                
-                
+            
         }
     }
 
