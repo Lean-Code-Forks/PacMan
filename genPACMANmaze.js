@@ -47,18 +47,12 @@ let pacmap = [];
     
     let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
         
-//     randomInnerBorders:
-        
-        let index, cnt, element;
-        cnt = 0; 
-        while (border_max_space) {
-            cnt++;
-            index = (cnt % total_grid_space);
-            element = pacmap[index]; 
+    randomInnerBorders:        
+        pacmap.forEach((element,index)=>{
             if ((element === empty) && (Math.random() > 0.5)) {
-                (pacmap[index] = border) && (border_max_space--);  
+                pacmap[index] = border  
             }
-        }
+        });
 // // InsertFruit:
         
 //         pacmap.forEach(element=>{ if (element === empty) element = dot;});
