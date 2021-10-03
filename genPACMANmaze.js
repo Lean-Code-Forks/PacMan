@@ -11,8 +11,7 @@ class Spawn{ width = 40;  height = 40; }
 
 const gridWidth = 400 / 10, gridHeight = 500 / 10;
 
-const empty = " ", border = "0", ghostSpawnLoc = "1";
-
+const empty = " ", border = "0", ghostSpawnLoc = "1", dot = "2";
 
 let pacmap = [];
 
@@ -31,7 +30,7 @@ InsertGhostBase:
     const row = Math.random(), col = Math.random();
     const rowT = Math.round(row * (gridHeight - 3));
     const colL = Math.round(col * (gridWidth  - 3));
-
+    
     for (let row = rowT; row < (rowT + 3); row++) {
         for (let col = colL; col < colL; col++) {
             
@@ -47,24 +46,18 @@ InsertGhostBase:
 
 InsertInnerBorders:
     
-    calc total grid space
+    const total_grid_space = gridWidth * gridHeight;
     
-    calc remaining space
-    
-    border max space is 1 / total grid
-    
-    line
-    
-    min 3 w/h enclosed shape minus one border piece to make opening
-    
-    
-    0000
-    0  0
-    0  0
-    0000
-       
-    
+    const gridPerimeter = 2 * (gridWidth + gridHeight);
 
+    const remaining_space = total_grid_space - gridPerimeter;
+    
+    let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
+        
+    randomInnerBorders:
 
+        pacmap.forEach(element=>{ (element === empty) && (Math.random() > 0.5) && (element = border) && (border_max_space--)});
 
 InsertFruit:
+        
+        pacmap.forEach(element=> if (element === empty) element = dot;
