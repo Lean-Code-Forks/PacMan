@@ -15,18 +15,17 @@ const empty = " ", border = "0", ghostSpawnLoc = "1", dot = "2";
 
 let pacmap = [];
 
-InsertPerimeterBordersIntoGrid:
+// InsertPerimeterBordersIntoGrid:
     for (let row = 0; row < gridHeight; row++){
         for (let col = 0; col < gridWidth; col++){
-            border: if ( ((col === 0) || (row === 0)) && (pacmap.push(border)) ) {}
-            border: else if ( ((col === gridWidth-1) || (row === gridHeight-1)) && (pacmap.push(border)) ) {}
-            empty:  else if ( (col !== 0)                && (pacmap.push(empty)) ) {}
+            /*border*/ if ( (col === 0) || (row === 0) ) pacmap.push(border);
+            /*border*/ else if ( (col === gridWidth-1) || (row === gridHeight-1) ) pacmap.push(border);
+            /*empty*/  else if ( (col !== 0) ) pacmap.push(empty);
         }
     }
     console.log(pacmap);
 
-InsertGhostBase:
-// 3 spaces by 3 spaces minimum
+// InsertGhostBase:
     const row = Math.random(), col = Math.random();
     const rowT = Math.round(row * (gridHeight - 3));
     const colL = Math.round(col * (gridWidth  - 3));
@@ -36,15 +35,15 @@ InsertGhostBase:
             
             idx = gridWidth * row + col 
                        
-            border: if ( ((col === 0) || (row === 0)) && (pacmap[idx] = border)) ) {}
-            border: else if ( ((col === gridWidth-1) || (row === gridHeight-1)) && (pacmap[idx] = border) ) {}
-            ghostSpawn:  else if ( (col !== 0)                && (pacmap[idx] = ghostSpawnLoc)) ) {}
+            /*border*/ if ( (col === 0) || (row === 0)) pacmap[idx] = border;
+            /*border*/ else if ( (col === gridWidth-1) || (row === gridHeight-1) ) pacmap[idx] = border;
+            /*ghostSpawn*/  else if ( (col !== 0) ) pacmap[idx] = ghostSpawnLoc;
                 
                 
         }
     }
 
-InsertInnerBorders:
+// InsertInnerBorders:
     
     const total_grid_space = gridWidth * gridHeight;
     
@@ -54,10 +53,10 @@ InsertInnerBorders:
     
     let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
         
-    randomInnerBorders:
+//     randomInnerBorders:
 
         pacmap.forEach(element=>{ (element === empty) && (Math.random() > 0.5) && (element = border) && (border_max_space--)});
 
-InsertFruit:
+// InsertFruit:
         
         pacmap.forEach(element=> if (element === empty) element = dot;
