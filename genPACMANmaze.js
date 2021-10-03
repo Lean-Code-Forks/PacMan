@@ -43,20 +43,20 @@ let pacmap = [];
         }
     }
 
-// InsertInnerBorders:
+// // InsertInnerBorders:
     
-    const total_grid_space = gridWidth * gridHeight;
+//     const total_grid_space = gridWidth * gridHeight;
     
-    const gridPerimeter = 2 * (gridWidth + gridHeight);
+//     const gridPerimeter = 2 * (gridWidth + gridHeight);
 
-    const remaining_space = total_grid_space - gridPerimeter;
+//     const remaining_space = total_grid_space - gridPerimeter;
     
-    let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
+//     let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
         
-//     randomInnerBorders:
+// //     randomInnerBorders:
 
-        pacmap.forEach(element=>{ (element === empty) && (Math.random() > 0.5) && (element = border) && (border_max_space--)});
+//         pacmap.forEach(element=>{ (element === empty) && (Math.random() > 0.5) && (element = border) && (border_max_space--)});
 
-// InsertFruit:
+// // InsertFruit:
         
-        pacmap.forEach(element=> if (element === empty) element = dot;
+//         pacmap.forEach(element=>{ if (element === empty) element = dot;});
