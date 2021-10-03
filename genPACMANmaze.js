@@ -11,7 +11,7 @@ class Spawn{ width = 40;  height = 40; }
 
 const gridWidth = 400 / 10, gridHeight = 500 / 10;
 
-const empty = " ", border = "0", ghostSpawnLoc = "1", dot = "2";
+const empty = " ", border = "0", ghostSpawnLoc = "1", ghostDoor = "2", dot = "3";
 
 let pacmap = [];
 
@@ -49,10 +49,10 @@ let pacmap = [];
         
     randomInnerBorders:        
         pacmap.forEach((element,index)=>{
-            if ((element === empty) && (Math.random() > 0.5)) {
+            if ((element === empty) && (Math.random() > 0.7)) {
                 pacmap[index] = border  
             }
         });
-// // InsertFruit:
+// InsertFruit:
         
-//         pacmap.forEach(element=>{ if (element === empty) element = dot;});
+        pacmap.forEach((element,index)=>{ if (element === empty) pacmap[index] = dot;});
