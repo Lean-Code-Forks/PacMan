@@ -11,7 +11,7 @@ class Spawn{ width = 40;  height = 40; }
 
 const gridWidth = 400 / 10, gridHeight = 500 / 10;
 
-const empty = " ", border = "0", ghostSpawnLoc = "1", dot = "2";
+const empty = "", border = "0", ghostSpawnLoc = "1", dot = "2";
 
 let pacmap = [];
 
@@ -26,24 +26,23 @@ let pacmap = [];
     console.log(pacmap);
 
 // InsertGhostBase:
+    let ghostBase = [
+        0,0,"",0,0,
+        0,1,1,1,0,
+        0,1,1,1,0,
+        0,0,0,0,0
+    ];
+    for (let row = (gridHeight / 2 - 2); row < (gridHeight / 2 + 2); row++){
+        for (let col = (gridWidth / 2 - 2); col < (gridWidth / 2 + 2); col++){
 
-    const ghostBaseWidth = 3, ghostBaseHeight = 3;
-
-    const row = Math.random(), col = Math.random();
-    const rowT = Math.round(row * (gridHeight - ghostBaseHeight));
-    const colL = Math.round(col * (gridWidth  - ghostBaseWidth));
-    
-    for (let row = rowT; row < (rowT + ghostBaseHeight); row++) {
-        for (let col = colL; col < (colL + ghostBaseWidth); col++) {
+            idx = (row * gridWidth + col);
             
-            idx = gridWidth * row + col 
-                       
-            /*border*/ if ( (col === 0) || (row === 0)) pacmap[idx] = border;
-            /*border*/ else if ( (col === gridWidth-1) || (row === gridHeight-1) ) pacmap[idx] = border;
-            /*ghostSpawn*/  else if ( (col !== 0) ) pacmap[idx] = ghostSpawnLoc;
+            pacmap[idx] = ghostBase.shift();
+            
             
         }
     }
+
 
 // // InsertInnerBorders:
     
