@@ -1,5 +1,3 @@
-
-
 window.onkeydown = function(evt){
     // probably need to insert a rate limiter because the character only moves so fast    
     if      (evt.keyCode === 37) pacman.move("left");
@@ -7,7 +5,6 @@ window.onkeydown = function(evt){
     else if (evt.keyCode === 39) pacman.move("right");
     else if (evt.keyCode === 40) pacman.move("down");
 }
-
 
 class Character {
     speed = {now: 1, eat: .8, empty: 1};
@@ -30,22 +27,33 @@ class PACMAN extends Character {
     }
 }
 class GHOST extends Character { // ghosts speeds constant // all ghosts must be different colors
-    img = ["red","blue","pink","yellow","orange","green"]
+    img = ["red","blue","pink","yellow","orange","green"];
+    plots = [];
     constructor(){
         super(this);
         this.speed = {now:1, eat: 1, empty:1}
         this.AI();
     }
-    AI(){
-        this.plotRouteToPacman();
-        this.take4PacesToPacman();
+    move(){
+        
+        if (pacman is 4 spaces away) follow him 
+        super.move()/
     }
-    plotRouteToPacman(){
-            // shortest path to pacman
+    proximity(){
         
-            if (element !== border) plottable
+        // this does not ever need to execute until pacman is within spaces ever
+        // saves plenty of cpu
+        
+        // not concerned about barriers here
+        if (
+            4 === Math.abs(pacman.position.x - this.position.x)
+            ||
+            4 === Math.abs(pacman.position.y - this.position.y)
+        ) { // now concerned about barriers
             
-        
+            for () for ()  
+            
+        }
     }
 }
 
