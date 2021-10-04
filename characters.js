@@ -1,6 +1,12 @@
 
 
-window.
+window.onkeydown = function(evt){
+    // probably need to insert a rate limiter because the character only moves so fast    
+    if      (evt.keyCode === 37) pacman.move("left");
+    else if (evt.keyCode === 38) pacman.move("up");
+    else if (evt.keyCode === 39) pacman.move("right");
+    else if (evt.keyCode === 40) pacman.move("down");
+}
 
 
 class Character {
@@ -12,10 +18,8 @@ class Character {
     }
     move(){
       switch (direction) {
-        case "left":  this.position.x--;
-        case "right": this.position.x++;
-        case "up":    this.position.y--;
-        case "down":  this.position.y++;
+        case "left":  this.position.x--; case "up":   this.position.y--;
+        case "right": this.position.x++; case "down": this.position.y++;
         default throw new Error();
       }
     }
@@ -30,6 +34,18 @@ class GHOST extends Character { // ghosts speeds constant // all ghosts must be 
     constructor(){
         super(this);
         this.speed = {now:1, eat: 1, empty:1}
+        this.AI();
+    }
+    AI(){
+        this.plotRouteToPacman();
+        this.take4PacesToPacman();
+    }
+    plotRouteToPacman(){
+            // shortest path to pacman
+        
+            if (element !== border) plottable
+            
+        
     }
 }
 
