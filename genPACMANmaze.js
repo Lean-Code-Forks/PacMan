@@ -6,15 +6,10 @@ class Wall { width = 20;  height = 20; }
 class Spawn{ width = 40;  height = 40; }
 
 
-// Need to generate maze with portals
-
-
 const gridWidth = 400 / 10, gridHeight = 500 / 10;
-
 const empty = " ", border = "0", ghostSpawnLoc = "1", ghostDoor = "2", dot = "3";
-
+const portals = ["A","A","B","B","C","C","D","D"];
 let pacmap = [];
-
 // InsertPerimeterBordersIntoGrid:
     for (let row = 0; row < gridHeight; row++){
         for (let col = 0; col < gridWidth; col++){
@@ -40,19 +35,22 @@ let pacmap = [];
 
 // InsertInnerBorders:
     const total_grid_space = gridWidth * gridHeight;
-    
     const gridPerimeter = 2 * (gridWidth + gridHeight);
-
     const remaining_space = total_grid_space - gridPerimeter;
-    
     let border_max_space  = remaining_space / 3; // this is flawed, will fail on small dimensional grid
-        
-    randomInnerBorders:        
+//     randomInnerBorders:        
         pacmap.forEach((element,index)=>{
             if ((element === empty) && (Math.random() > 0.7)) {
                 pacmap[index] = border  
             }
         });
+
+// InsertPortals:
+    let randIndex; let portalsCOPY = portals.slice();
+    while (portalsCOPY.length) { 
+        randIndex = Math.random() * pacmap.length; 
+        if (empty === pacmap[randIndex]) pacmap[randIndex] = portalsCOPY.shift()
+    }
+
 // InsertFruit:
-        
         pacmap.forEach((element,index)=>{ if (element === empty) pacmap[index] = dot;});
